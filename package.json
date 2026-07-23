@@ -1,0 +1,76 @@
+{
+  "name": "zero-code-lens",
+  "displayName": "Zero | Code Lens",
+  "description": "代码内联增强 — 函数上方显示圈复杂度、行数、TODO数，一眼看清代码质量",
+  "version": "1.0.0",
+  "publisher": "zero-labs",
+  "author": "Zero Labs",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "icon": "resources/icon.png",
+  "pricing": "Free",
+  "categories": ["Linters", "Other"],
+  "keywords": ["codelens", "complexity", "metrics", "inline", "code quality"],
+  "galleryBanner": { "color": "#0f0f1a", "theme": "dark" },
+  "engines": { "vscode": "^1.74.0" },
+  "activationEvents": ["onLanguage:typescript", "onLanguage:javascript", "onLanguage:typescriptreact", "onLanguage:javascriptreact"],
+  "main": "./out/extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yaofuzhang/vscode-code-lens"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "codeLens.showDetail",
+        "title": "查看详情",
+        "category": "Code Lens"
+      },
+      {
+        "command": "codeLens.togglePro",
+        "title": "激活 Pro",
+        "category": "Code Lens"
+      }
+    ],
+    "configuration": {
+      "title": "Code Lens",
+      "properties": {
+        "codeLens.showComplexity": {
+          "type": "boolean", "default": true,
+          "description": "在函数上方显示圈复杂度"
+        },
+        "codeLens.showLineCount": {
+          "type": "boolean", "default": true,
+          "description": "在函数上方显示行数"
+        },
+        "codeLens.showTodoCount": {
+          "type": "boolean", "default": true,
+          "description": "在函数上方显示 TODO 数量"
+        },
+        "codeLens.colorCode": {
+          "type": "boolean", "default": true,
+          "description": "用颜色标记复杂度等级（绿/黄/红）"
+        },
+        "codeLens.complexityThreshold": {
+          "type": "number", "default": 15,
+          "description": "圈复杂度警告阈值"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/babel__parser": "^7.0.0",
+    "@types/babel__traverse": "^7.28.0",
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.74.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.24.0",
+    "@babel/traverse": "^7.24.0"
+  }
+}
