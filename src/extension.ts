@@ -42,10 +42,17 @@ export function activate(context: vscode.ExtensionContext): void {
   // ─── 命令：切换 Pro ──────────────────────────
   context.subscriptions.push(
     vscode.commands.registerCommand('codeLens.togglePro', async () => {
+      const r = await vscode.window.showInformationMessage(
+        'Code Lens Pro · ¥9.9 永久买断', '获取激活码', '输入激活码'
+      );
+      if (r === '获取激活码') {
+        vscode.env.openExternal(vscode.Uri.parse('https://yaofuzhang.github.io/zerolabs-ext/pro/'));
+        return;
+      }
+      if (r !== '输入激活码') return;
       const code = await vscode.window.showInputBox({
-        title: 'Code Lens Pro · ¥9.9 永久买断',
+        title: 'Code Lens Pro · 输入激活码',
         placeHolder: 'XXXX-XXXX-XXXX-YYYY',
-        prompt: '解锁自定义颜色、详细类型提示、调用链分析',
       });
       if (code) {
         // 复用 Code Pulse 的同款离线验证算法
